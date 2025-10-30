@@ -1,0 +1,13 @@
+{
+  "version": "1.0.0",
+  "author": "Smitty",
+  "description": "Imaging a description here lmao",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "Working?"
+  },
+  "devDependencies": {
+    "electron": "^39.0.0"
+  }
+}
