@@ -10,7 +10,7 @@ const createWindow = () => {
     height: 800
   })
 
-  win.loadFile('index.html')
+  win.loadURL("http://localhost:5173/");
 }
 
 //renders a window when the program starts
