@@ -30,6 +30,6 @@ export default function Footer() {
             
         </table>
 
-        <img src="https://i.imgflip.com/5otvtn.png" alt=""/>
+        <img id="chair" src="https://i.imgflip.com/5otvtn.png" alt=""/>
     </div>
 }

@@ -31,8 +31,8 @@
       padding-left: 0px;
     }
   }
-  img{
-    padding-left: 69.2vw;
+  #chair{
+    float: right;
   }
 }
 
