@@ -1,11 +1,24 @@
 #make an asyncweb scraper to grab all achievement docs
-import time
 import asyncio
 from bs4 import BeautifulSoup
 import aiohttp as aiohttp
 from urllib.parse import urljoin
 import pprint
+from pymongo import MongoClient
+from dotenv import load_dotenv
+import os
+from tqdm import tqdm
 
+
+load_dotenv()
+URI = os.getenv("MONGO_URI")
+
+#Connection to MongoDB
+client = MongoClient(URI)
+db = client["acheivement_guides"]
+collection = db["guides"]
+
+#Connect to the site
 URL = "https://www.powerpyx.com"
 
 async def fetch(url):
@@ -14,7 +27,7 @@ async def fetch(url):
             return await response.text()
 
 async def crawl_names():
-    games_path = []
+    games_path = {}
 
     content = await fetch(urljoin(URL, "/guides"))
     soup = BeautifulSoup(content, "html.parser")
@@ -24,25 +37,52 @@ async def crawl_names():
     #all_dates = soup.find_all("td", {"class": "column-2"}) # This is for the dates? Maybe?
     #Then iterate so it only counts as one request
     #Follows the robots.txt guidelines
+    #If this runs more than once, ie; multiple pages before scraping, run utime.sleep(20)
 
     for each in all_names:
         a_tag = each.find("a")
         if a_tag and a_tag.has_attr("href"): #If theres an a tag and it has an href
-            each_name = a_tag["href"].replace(URL, "") #Create an entry and remove the beginning of the url
-            games_path.append(each_name)
+            text = a_tag.get_text(strip=True)
+            each_name = a_tag["href"]
+            games_path[text] = {"name": each_name}
     return games_path
+
+#def add_to_collection(games_path):
+#    collection.insert_many(games_path.values())
 
 
 #TODO
 #Okay so to this point, we have a list of the links to each page
 #We need to add each of them to the end of the URL
 
+#Now we go inside each page and get digging
+
+#test one
+async def crawl_games(games_paths):
+    content = await fetch(urljoin(URL, "/tormented-souls-2-walkthrough/"))
+    soup = BeautifulSoup(content, "html.parser")
+    information = [tag for tag in soup.find_all(class_="entry-content")
+                   if tag.get("class") == ["entry-content"]]
+    #What we need;
+    #Trophy name / title
+    #Information about broken into each section
+    #Image or clip art
+
+
+    #need to remove the comment list OR only grab what we need
+    return information
+
+
 # ---------- RUN ------------ #
 async def main():
     games_path = await crawl_names()
     pp = pprint.PrettyPrinter()
-
-    pp.pprint(games_path)
-
+    #add_to_collection(games_path)
+    #pp.pprint(games_path)
+    #Add information to db
+    information = await crawl_games(games_path)
+    pp.pprint(information)
+    #Close database
+    client.close()
 asyncio.run(main())
 
