@@ -12,7 +12,7 @@ export default function Footer() {
                 <tr>
                     {/* 
                         the tableCol just lets me space out the table completely, so it takes up 
-                        the whole area and not just the area it needs to be ther 
+                        the whole area and not just the area it needs to be there 
                     */}
                     <td id="tableCol">
                         <u><b><h3>Developed By:</h3></b></u>
