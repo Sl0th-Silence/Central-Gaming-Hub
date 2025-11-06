@@ -17,9 +17,9 @@ function App () {
   console.log(gameArr);
   
   return (
-    <>
+    <div className='appRoot'>
       <Hub games={gameArr}/>
-    </>
+    </div>
   )
 }
 
