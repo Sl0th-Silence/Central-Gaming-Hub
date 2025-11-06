@@ -19,7 +19,7 @@ function App () {
   /*
     if this isn't here, the window Electron makes cannot see this function
     and it will say the function does not exist when attempting to use it
-    inside of the main.js file (what lets electron show react)
+    inside of the main.js file (what lets electron show stuff in react)
   */
   window.receiveGameData = receiveGameData;
 
