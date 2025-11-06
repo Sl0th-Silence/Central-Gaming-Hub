@@ -1,6 +1,8 @@
 import GameCard from "./GameCard"
 
-export default function BodyContent() {
+export default function BodyContent(props) {
+    const gameArr = props.games;
+
     const sampleStuff = [
         {
             title: "Nier Automata",
@@ -23,10 +25,18 @@ export default function BodyContent() {
         }
     ]
 
-    return <div className="gameBox">
+    return <>
+    <h4>GAME LIST (C:/Program Files (x86)/Steam/steamapps/common):</h4>
+        {gameArr.map((game) => {
+            return <>
+            <p>{game}<br /></p> 
+            </>
+        })}<div className="gameBox">
         {sampleStuff.map((game) => {
             //console.log(game);
             return <GameCard key={game.title} data={game} />
         })}
-    </div>
+        </div>
+    </>
+    
 }

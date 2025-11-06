@@ -3,12 +3,12 @@ import Footer from "./Footer";
 import BodyContent from "./BodyContent";
 
 //main container for all the data, pages, etc. that are used
-export default function Hub() {
-    
+export default function Hub(props) {
+    const gameArr = props.games;
 
     return <div>
         <NavBar />
-        <BodyContent />
+        <BodyContent games={gameArr}/>
         <Footer />
     </div>
 }
