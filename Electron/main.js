@@ -5,6 +5,22 @@ const fileReader = require("fs");
 
 const steamDIR = "C:/Program Files (x86)/Steam/steamapps/common";
 
+
+//Checking for logos -Jay
+const steamImageDIR = "C:/Program Files (x86)/Steam/appcache/librarycache/"
+const steamImageArr = fileReader.readdirSync(steamImageDIR);
+allImages = []
+
+//For each folder, add the name at the end of the url
+steamImageArr.forEach(item => {
+    image = (steamImageDIR + item + "/header");
+    if(image)
+    {
+      //Add to array
+      allImages.push(image);
+    }
+});
+
 const gameArr = fileReader.readdirSync(steamDIR);
 
 //creates a electron window
