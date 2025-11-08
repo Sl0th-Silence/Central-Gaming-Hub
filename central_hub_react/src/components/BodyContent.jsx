@@ -11,7 +11,9 @@ export default function BodyContent (props) {
         */ 
         const gameArr = props.games;
 
-        console.log(gameArr);
+        const showGameListAsTXT = false;
+
+        //console.log(gameArr);
         
         //sample data for testing purposes
         const sampleStuff = [
@@ -65,7 +67,7 @@ export default function BodyContent (props) {
                     - no games are installed
                     - the user is accessing this from a browser and not electron
             */}
-            {gameArr[0] != undefined ? (
+            {gameArr[0] != undefined  && showGameListAsTXT? (
                 <h4>GAME LIST (C:/Program Files (x86)/Steam/steamapps/common):</h4>
             ) : (<p></p>)}
             
@@ -76,11 +78,11 @@ export default function BodyContent (props) {
                 blank <p> statement which is negligable in terms of styling
             */}
     
-            {gameArr.map((game) => {
+            {(showGameListAsTXT) ? gameArr.map((game) => {
                 return <p>
                     {game.title}
                 </p>
-            })}
+            }) : ""}
             { 
             <div className="gameBox">
             {
