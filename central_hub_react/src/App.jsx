@@ -1,17 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import './App.css';
 import Hub from './components/Hub';
 
-
-
-function App () {
+function App () { 
   /*
     this will get an array passed to it, which then is set in a variable
 
     said array is the list of all games found on the respective directory,
     which is then turned into a JSON output and sent here
   */
-  function receiveGameData (data) {
+  function receieveGameData (data) {
     //console.log("IN GAME FUNCTION");
     setGameArr(data);
   }
@@ -21,7 +19,7 @@ function App () {
     and it will say the function does not exist when attempting to use it
     inside of the main.js file (what lets electron render react files)
   */
-  window.receiveGameData = receiveGameData;
+  window.receieveGameData = receieveGameData;
 
   /*
     it's set as a use state so the window doesn't refresh when adding data.
@@ -37,7 +35,7 @@ function App () {
       function & useState portion.*
   */
   const [gameArr, setGameArr] = useState([]);
-  console.log(gameArr);
+
   
   return <>
     {/* 
@@ -46,9 +44,11 @@ function App () {
       leaving it this way, since it works without issues 
     */}
       <div className='appRoot'>
-        <Hub games={gameArr}/>
+        {console.log(gameArr)}
+        <Hub games={gameArr} />
       </div>
   </>
-}
+  }
+
 
 export default App

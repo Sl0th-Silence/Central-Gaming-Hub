@@ -1,5 +1,6 @@
-export default function GameCard(props) {
+import fs from "fs";
 
+export default function GameCard(props) {
     /*
         this will be a singluar game that is passed through props,
         said game has:
@@ -11,6 +12,8 @@ export default function GameCard(props) {
             - amount of achievements the game has
     */
     const game = props.data;
+    const imgURL = "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/"+ game.id + "/header.jpg";
+
     //console.log(props)
     //console.log("inside of gamecard")
 
@@ -39,7 +42,7 @@ export default function GameCard(props) {
                 <tbody>
                     <tr>           
                         <td>
-                            <img src={game.imgURL} alt=""/>
+                            <img src={imgURL} alt=""/>
                         </td>
                         <td>
                             <p>Developers: </p>

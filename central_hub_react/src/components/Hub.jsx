@@ -6,6 +6,7 @@ import BodyContent from "./BodyContent";
 export default function Hub(props) {
     const gameArr = props.games;
 
+    console.log(gameArr);
     return <div>
         <NavBar />
         <BodyContent games={gameArr}/>
