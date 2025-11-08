@@ -69,7 +69,7 @@ export default function BodyContent (props) {
             */}
             {gameArr[0] != undefined  && showGameListAsTXT? (
                 <h4>GAME LIST (C:/Program Files (x86)/Steam/steamapps/common):</h4>
-            ) : (<p></p>)}
+            ) : (null)}
             
             {/*
                 this section is exluded from the above check, as if the elements 
@@ -82,7 +82,7 @@ export default function BodyContent (props) {
                 return <p>
                     {game.title}
                 </p>
-            }) : ""}
+            }) : null}
             { 
             <div className="gameBox">
             {
