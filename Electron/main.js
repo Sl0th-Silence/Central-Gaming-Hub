@@ -6,6 +6,11 @@ const { app, BrowserWindow } = require('electron');
 const fileReader = require("fs");
 const path = require("path");
 
+//geting stuff off steam ?
+const got = require('got');
+const jsdom = require("jsdom");
+const { JSDOM } = jsdom;
+
 //the default steam directory, this will be changable at a later point (probably)
 const steamDIR = "C:/Program Files (x86)/Steam/steamapps/common";
 
@@ -33,7 +38,7 @@ const gameManifestArr = fileReader.readdirSync(manifestDIR);
 
 let manifests = [];
 gameManifestArr.map((file) => {
-  if(file.includes("appmanifest_")){
+  if(file.includes("appmanifest_") && !file.includes("228980")){
     manifests.push(file);
   }
 });
@@ -143,6 +148,17 @@ if(gameArrOut[0] != ""){
 const gameArr = gameArrFull.map((game) => {
     //making data
     let appId = game.find(prop => prop.prop === "appid").val
+    // const url = "https://steamcommunity.com/stats/" + appId + "/achievements";
+    // const getVal = async () => { 
+    //   got(url).then(response => {
+    //     const dom = new JSDOM(response.body);
+    //     console.log(dom.window.document.getElementById("headerContentLeft").textContent)
+    //   })
+    //   .catch(error => {
+    //     console.error(error);
+    //   });
+    // }
+    // getVal();
     return {
         id: appId,
         fileName: game.find(prop => prop.prop === "installdir").val,
